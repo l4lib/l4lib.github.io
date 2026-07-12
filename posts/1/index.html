@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hugo와 GitHub Pages로 개발 블로그 구축하기 | l4lib</title>
+<meta name="keywords" content="">
+<meta name="description" content="GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.
+GitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.
+이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.
+
+1. Hugo 다운로드
+운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.
+
+https://github.com/gohugoio/hugo/releases
+
+
+2. GitHub 저장소 생성
+Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.">
+<meta name="author" content="">
+<link rel="canonical" href="https://l4lib.github.io/posts/1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://l4lib.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://l4lib.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://l4lib.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://l4lib.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://l4lib.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://l4lib.github.io/posts/1/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://l4lib.github.io/posts/1/">
+  <meta property="og:site_name" content="l4lib">
+  <meta property="og:title" content="Hugo와 GitHub Pages로 개발 블로그 구축하기">
+  <meta property="og:description" content="GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.
+GitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.
+이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.
+1. Hugo 다운로드 운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.
+https://github.com/gohugoio/hugo/releases 2. GitHub 저장소 생성 Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.">
+  <meta property="og:locale" content="ko_kr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-12T23:02:18+09:00">
+    <meta property="article:modified_time" content="2026-07-12T23:02:18+09:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hugo와 GitHub Pages로 개발 블로그 구축하기">
+  <meta name="twitter:description" content="GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.
+GitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.
+이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.
+1. Hugo 다운로드 운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.
+https://github.com/gohugoio/hugo/releases 2. GitHub 저장소 생성 Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://l4lib.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hugo와 GitHub Pages로 개발 블로그 구축하기",
+      "item": "https://l4lib.github.io/posts/1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hugo와 GitHub Pages로 개발 블로그 구축하기",
+  "name": "Hugo와 GitHub Pages로 개발 블로그 구축하기",
+  "description": "GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.\nGitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.\n이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.\n1. Hugo 다운로드 운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.\nhttps://github.com/gohugoio/hugo/releases 2. GitHub 저장소 생성 Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.\nGitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.\n이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.\n1. Hugo 다운로드 운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.\nhttps://github.com/gohugoio/hugo/releases 2. GitHub 저장소 생성 Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.\n소스 저장소 (Private) : username.github.blog 배포 저장소 (Public) : username.github.io 저장소 생성 시 README.md를 함께 생성하면 초기 커밋을 따로 만들 필요가 없어 편하다.\n3. Hugo 프로젝트 생성 아래 명령줄을 실행하여 디렉토리 생성 후 저장소를 연결한다.\nhugo new site 뒤에 오는 이름은 프로젝트 디렉터리 이름일 뿐이므로 호스팅과는 상관이 없다. hugo new site username.github.blog cd username.github.blog git init git remote add origin https://github.com/username/username.github.blog.git 4. 테마 및 Submodule 설정 테마 추가 Hugo는 다양한 테마를 제공한다.\nhttps://themes.gohugo.io/ 이번 글에서는 PaperMod 테마를 사용했다.\ngit submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod 배포 저장소 연결 git submodule add -b main https://github.com/username/username.github.io.git public 빌드 결과물이 public 디렉터리에 생성되므로 GitHub Pages 저장소와 연결한다.\n5. hugo.toml 설정 baseURL = \"https://username.github.io/\" languageCode = \"ko-kr\" title = \"username\" theme = \"PaperMod\" [params] assets.disableFingerprinting = true baseURL : 블로그 주소를 입력한다. languageCode : 사이트의 기본 언어를 설정한다. title : 블로그 제목을 설정한다. theme : 사용할 테마를 지정한다. assets.disableFingerprinting : 최신 Hugo와 일부 테마 조합에서 발생하는 Integrity 오류를 방지하기 위해 추가했다. 6. 로컬 테스트 hugo server -D 브라우저에서 http://localhost:1313으로 접속하면 수정 사항을 실시간으로 확인할 수 있다.\n7. GitHub Pages 배포 hugo cd public git add . git commit -m \"Deploy\" git push origin main 잠시 후 https://username.github.io에서 결과를 확인할 수 있다.\n8. 소스 저장소 Push (최초 1회) .gitignore 파일을 생성한다. public은 Git Submodule로 관리되므로 별도로 Ignore할 필요가 없다. /.hugo_build.lock /resources/ 소스 저장소 Push (최초 1회) 저장소를 생성할 때 README.md를 만들지 않았다면 pull --allow-unrelated-histories 과정은 필요하지 않다. git add . git commit -m \"Initial commit\" git branch --set-upstream-to=origin/main main git pull origin main --allow-unrelated-histories git push origin main 9. 다른 PC에서 프로젝트 이어하기 다른 PC에서 작업할 경우에는 Submodule까지 함께 Clone 해야 한다.\ngit clone --recurse-submodules https://github.com/username/username.github.blog.git 만약 일반 Clone을 했다면 아래 명령으로 Submodule을 내려받을 수 있다. git submodule update --init --recursive 9. 게시물 작성 소스 저장소에서 아래와 같이 실행하면 각 폴더 하위에 파일이 생성된다. 편집은 별도 편집 도구로 편집한다. 꼭 아래 명령줄과 같이 생성하지않아도되고 다른 방법으로 파일을 생성해도된다. 테스트 서버가 실행된 상태라면 파일을 저장할때 바로바로 테스트 서버에 반영되어 미리보기가 간편하다. hugo new posts/1.md hugo new posts/test/test1.md hugo new posts/20260713.md 10. 소스 현행화 및 배포 최상위 폴더에서 정적 파일 빌드 (public 폴더 갱신) hugo 배포 저장소(public)로 이동 후 반영 및 푸시 cd public git add . git commit -m \"Add posts\" git push origin main 다시 최상위 소스 폴더로 복귀 (포탈에서 빠져나오기) cd .. public 연결 링크와 원본 마크다운을 소스 저장소에 최종 백업 git add . git commit -m \"Add posts\" git push origin main ",
+  "wordCount" : "468",
+  "inLanguage": "en",
+  "datePublished": "2026-07-12T23:02:18+09:00",
+  "dateModified": "2026-07-12T23:02:18+09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://l4lib.github.io/posts/1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "l4lib",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://l4lib.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://l4lib.github.io/" accesskey="h" title="l4lib (Alt + H)">l4lib</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Hugo와 GitHub Pages로 개발 블로그 구축하기
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-07-12 23:02:18 +0900 KST'>2026년 7월 12일</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>GitHub Pages를 이용하면 무료로 정적 웹사이트를 호스팅할 수 있다. 언젠가는 만들어야지 생각만 하다가, 이번 기회에 Hugo를 이용해 구축했다.</p>
+<p>GitHub에서는 기본적으로 Jekyll을 안내하지만, Hugo로 이전하는 사례가 많아 Hugo를 선택했다.</p>
+<p>이번 글에서는 Hugo와 GitHub Pages 환경을 구축하면서 진행한 과정을 정리한다.</p>
+<hr>
+<h2 id="1-hugo-다운로드">1. Hugo 다운로드<a hidden class="anchor" aria-hidden="true" href="#1-hugo-다운로드">#</a></h2>
+<p>운영체제에 맞는 Hugo 실행 파일을 내려받아 환경 변수(PATH)에 등록한다.</p>
+<ul>
+<li><a href="https://github.com/gohugoio/hugo/releases">https://github.com/gohugoio/hugo/releases</a></li>
+</ul>
+<hr>
+<h2 id="2-github-저장소-생성">2. GitHub 저장소 생성<a hidden class="anchor" aria-hidden="true" href="#2-github-저장소-생성">#</a></h2>
+<p>Jekyll 은 소스를 그대로 배포하지만 Hugo 는 빌드 과정이 존재하여 소스 저장소와 배포 저장소를 구분하여 생성한다.</p>
+<ul>
+<li><strong>소스 저장소 (Private)</strong> : <code>username.github.blog</code></li>
+<li><strong>배포 저장소 (Public)</strong> : <code>username.github.io</code></li>
+</ul>
+<blockquote>
+<p>저장소 생성 시 <code>README.md</code>를 함께 생성하면 초기 커밋을 따로 만들 필요가 없어 편하다.</p>
+</blockquote>
+<hr>
+<h2 id="3-hugo-프로젝트-생성">3. Hugo 프로젝트 생성<a hidden class="anchor" aria-hidden="true" href="#3-hugo-프로젝트-생성">#</a></h2>
+<p>아래 명령줄을 실행하여 디렉토리 생성 후 저장소를 연결한다.</p>
+<ul>
+<li><code>hugo new site</code> 뒤에 오는 이름은 프로젝트 디렉터리 이름일 뿐이므로 호스팅과는 상관이 없다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo new site username.github.blog
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd username.github.blog
+</span></span><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>git remote add origin https://github.com/username/username.github.blog.git
+</span></span></code></pre></div><hr>
+<h2 id="4-테마-및-submodule-설정">4. 테마 및 Submodule 설정<a hidden class="anchor" aria-hidden="true" href="#4-테마-및-submodule-설정">#</a></h2>
+<h3 id="테마-추가">테마 추가<a hidden class="anchor" aria-hidden="true" href="#테마-추가">#</a></h3>
+<p>Hugo는 다양한 테마를 제공한다.</p>
+<ul>
+<li><a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a></li>
+</ul>
+<p>이번 글에서는 <strong>PaperMod</strong> 테마를 사용했다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+</span></span></code></pre></div><h3 id="배포-저장소-연결">배포 저장소 연결<a hidden class="anchor" aria-hidden="true" href="#배포-저장소-연결">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git submodule add -b main https://github.com/username/username.github.io.git public
+</span></span></code></pre></div><p>빌드 결과물이 <code>public</code> 디렉터리에 생성되므로 GitHub Pages 저장소와 연결한다.</p>
+<hr>
+<h2 id="5-hugotoml-설정">5. hugo.toml 설정<a hidden class="anchor" aria-hidden="true" href="#5-hugotoml-설정">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">baseURL</span> = <span style="color:#e6db74">&#34;https://username.github.io/&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">languageCode</span> = <span style="color:#e6db74">&#34;ko-kr&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;PaperMod&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">params</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">assets</span>.<span style="color:#a6e22e">disableFingerprinting</span> = <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><ul>
+<li><strong>baseURL</strong> : 블로그 주소를 입력한다.</li>
+<li><strong>languageCode</strong> : 사이트의 기본 언어를 설정한다.</li>
+<li><strong>title</strong> : 블로그 제목을 설정한다.</li>
+<li><strong>theme</strong> : 사용할 테마를 지정한다.</li>
+<li><strong>assets.disableFingerprinting</strong> : 최신 Hugo와 일부 테마 조합에서 발생하는 <code>Integrity</code> 오류를 방지하기 위해 추가했다.</li>
+</ul>
+<hr>
+<h2 id="6-로컬-테스트">6. 로컬 테스트<a hidden class="anchor" aria-hidden="true" href="#6-로컬-테스트">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo server -D
+</span></span></code></pre></div><p>브라우저에서 <code>http://localhost:1313</code>으로 접속하면 수정 사항을 실시간으로 확인할 수 있다.</p>
+<hr>
+<h2 id="7-github-pages-배포">7. GitHub Pages 배포<a hidden class="anchor" aria-hidden="true" href="#7-github-pages-배포">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd public
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Deploy&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><p>잠시 후 <code>https://username.github.io</code>에서 결과를 확인할 수 있다.</p>
+<h2 id="8-소스-저장소-push-최초-1회">8. 소스 저장소 Push (최초 1회)<a hidden class="anchor" aria-hidden="true" href="#8-소스-저장소-push-최초-1회">#</a></h2>
+<ul>
+<li>.gitignore 파일을 생성한다.
+<ul>
+<li>public은 Git Submodule로 관리되므로 별도로 Ignore할 필요가 없다.</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>/.hugo_build.lock
+/resources/
+</code></pre><ul>
+<li>소스 저장소 Push (최초 1회)
+<ul>
+<li>저장소를 생성할 때 README.md를 만들지 않았다면 <code>pull --allow-unrelated-histories</code> 과정은 필요하지 않다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Initial commit&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git branch --set-upstream-to<span style="color:#f92672">=</span>origin/main main
+</span></span><span style="display:flex;"><span>git pull origin main --allow-unrelated-histories
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><h3 id="9-다른-pc에서-프로젝트-이어하기">9. 다른 PC에서 프로젝트 이어하기<a hidden class="anchor" aria-hidden="true" href="#9-다른-pc에서-프로젝트-이어하기">#</a></h3>
+<p>다른 PC에서 작업할 경우에는 Submodule까지 함께 Clone 해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone --recurse-submodules https://github.com/username/username.github.blog.git
+</span></span></code></pre></div><ul>
+<li>만약 일반 Clone을 했다면 아래 명령으로 Submodule을 내려받을 수 있다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git submodule update --init --recursive
+</span></span></code></pre></div><h2 id="9-게시물-작성">9. 게시물 작성<a hidden class="anchor" aria-hidden="true" href="#9-게시물-작성">#</a></h2>
+<ul>
+<li>소스 저장소에서 아래와 같이 실행하면 각 폴더 하위에 파일이 생성된다.
+<ul>
+<li>편집은 별도 편집 도구로 편집한다.</li>
+<li>꼭 아래 명령줄과 같이 생성하지않아도되고 다른 방법으로 파일을 생성해도된다.</li>
+</ul>
+</li>
+<li>테스트 서버가 실행된 상태라면 파일을 저장할때 바로바로 테스트 서버에 반영되어 미리보기가 간편하다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new posts/1.md
+</span></span><span style="display:flex;"><span>hugo new posts/test/test1.md
+</span></span><span style="display:flex;"><span>hugo new posts/20260713.md
+</span></span></code></pre></div><h2 id="10-소스-현행화-및-배포">10. 소스 현행화 및 배포<a hidden class="anchor" aria-hidden="true" href="#10-소스-현행화-및-배포">#</a></h2>
+<h3 id="최상위-폴더에서-정적-파일-빌드-public-폴더-갱신">최상위 폴더에서 정적 파일 빌드 (public 폴더 갱신)<a hidden class="anchor" aria-hidden="true" href="#최상위-폴더에서-정적-파일-빌드-public-폴더-갱신">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo
+</span></span></code></pre></div><h3 id="배포-저장소public로-이동-후-반영-및-푸시">배포 저장소(public)로 이동 후 반영 및 푸시<a hidden class="anchor" aria-hidden="true" href="#배포-저장소public로-이동-후-반영-및-푸시">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd public
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Add posts&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><h3 id="다시-최상위-소스-폴더로-복귀-포탈에서-빠져나오기">다시 최상위 소스 폴더로 복귀 (포탈에서 빠져나오기)<a hidden class="anchor" aria-hidden="true" href="#다시-최상위-소스-폴더로-복귀-포탈에서-빠져나오기">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd ..
+</span></span></code></pre></div><h3 id="public-연결-링크와-원본-마크다운을-소스-저장소에-최종-백업">public 연결 링크와 원본 마크다운을 소스 저장소에 최종 백업<a hidden class="anchor" aria-hidden="true" href="#public-연결-링크와-원본-마크다운을-소스-저장소에-최종-백업">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Add posts&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://l4lib.github.io/">l4lib</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
